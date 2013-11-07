@@ -1,7 +1,7 @@
 package jmigration.impl;
 
 import jmigration.common.Lambda;
-import jmigration.impl.data.CachedFile;
+import jmigration.impl.data.CachedFileImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public final class Utils {
     private Utils() {
     }
 
-    public static List<String> getStrings(CachedFile file) {
+    public static List<String> getStrings(CachedFileImpl file) {
         final List<String> test = new ArrayList<>();
         file.forEach(new Lambda<String, Void>() {
             @Override

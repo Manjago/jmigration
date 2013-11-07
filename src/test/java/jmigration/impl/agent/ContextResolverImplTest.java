@@ -1,7 +1,8 @@
 package jmigration.impl.agent;
 
 import jmigration.common.Lambda;
-import jmigration.impl.data.ContextImpl;
+import jmigration.impl.data.ConfigType;
+import jmigration.impl.data.SourceDataImpl;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -14,9 +15,9 @@ import java.util.List;
  */
 public class ContextResolverImplTest {
 
-    private static List<String> getStrings(ContextImpl file) {
+    private static List<String> getStrings(ConfigType configType, SourceDataImpl file) {
         final List<String> test = new ArrayList<>();
-        file.forEachBink(new Lambda<String, Void>() {
+        file.forEach(configType, new Lambda<String, Void>() {
             @Override
             public Void execute(String arg) {
                 test.add(arg);
@@ -29,15 +30,15 @@ public class ContextResolverImplTest {
     @Test
     public void testLoadFile() throws Exception {
 
-        ContextResolverImpl resolver = new ContextResolverImpl();
+        SourceResolverImpl resolver = new SourceResolverImpl();
 
         URL url = ContextResolverImplTest.class.getResource("binkd.cfg");
 
 
-        final ContextImpl context = new ContextImpl();
-        resolver.loadBinkConfig(context, url.getPath());
+        final SourceDataImpl context = new SourceDataImpl();
+        resolver.loadBinkConfig(context, ConfigType.BINK, url.getPath());
 
-        final List<String> test = getStrings(context);
+        final List<String> test = getStrings(ConfigType.BINK, context);
 
         Assert.assertEquals(338, test.size());
         Assert.assertEquals("#defnode -nr *", test.get(337));

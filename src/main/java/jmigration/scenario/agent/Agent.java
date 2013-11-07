@@ -1,13 +1,13 @@
 package jmigration.scenario.agent;
 
-import jmigration.scenario.data.Context;
 import jmigration.scenario.data.FidoData;
+import jmigration.scenario.data.SourceData;
 
 /**
  * @author Manjago (kirill@temnenkov.com)
  */
 public interface Agent {
-    void load(Context context, FidoData fidoData);
+    void load(SourceData sourceData, FidoData fidoData);
 
-    void export(Context context, FidoData fidoData);
+    void export(SourceData sourceData, FidoData fidoData);
 }

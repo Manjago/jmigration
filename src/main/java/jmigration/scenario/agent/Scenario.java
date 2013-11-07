@@ -6,7 +6,7 @@ package jmigration.scenario.agent;
 public interface Scenario {
     void setAgent(Agent agent);
 
-    void setContextResolver(ContextResolver contextResolver);
+    void setContextResolver(SourceResolver sourceResolver);
 
     void process();
 }

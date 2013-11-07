@@ -3,5 +3,5 @@ package jmigration.scenario.data;
 /**
  * @author Manjago (kirill@temnenkov.com)
  */
-public interface Context {
+public interface SourceData {
 }

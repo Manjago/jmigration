@@ -10,10 +10,10 @@ import java.util.List;
 /**
  * @author Manjago (kirill@temnenkov.com)
  */
-public class CachedFileTest {
+public class CachedFileImplTest {
     @Test
     public void testAddLine() throws Exception {
-        CachedFile file = new CachedFile();
+        CachedFileImpl file = new CachedFileImpl();
         file.addLine("1");
         file.addLine("2");
         file.addLine(null);
@@ -28,12 +28,18 @@ public class CachedFileTest {
 
     @Test
     public void testEmpty() throws Exception {
-        CachedFile file = new CachedFile();
+        CachedFileImpl file = new CachedFileImpl();
         file.forEach(new Lambda<String, Void>() {
             @Override
             public Void execute(String arg) {
                 return null;
             }
         });
+    }
+
+    @Test
+    public void testNullForEach() throws Exception {
+        CachedFileImpl file = new CachedFileImpl();
+        file.forEach(null);
     }
 }
