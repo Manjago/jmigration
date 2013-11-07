@@ -19,7 +19,7 @@ public class ContextResolverImpl implements ContextResolver {
             @Override
             public Void execute(String arg) {
 
-                context.getBinkContent().add(arg);
+                context.addLineBink(arg);
 
                 return null;
             }

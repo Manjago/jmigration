@@ -1,26 +1,29 @@
 package jmigration.impl.data;
 
+import jmigration.common.Lambda;
 import jmigration.scenario.data.Context;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Kirill Temnenkov (ktemnenkov@intervale.ru)
  */
 public class ContextImpl implements Context {
 
-    private List<String> binkContent;
+    private CachedFile binkContent;
 
-    public List<String> getBinkContent() {
+    public void addLineBink(String line) {
+        getBinkContent().addLine(line);
+    }
+
+    public void forEachBink(Lambda<String, Void> cmd) {
+        getBinkContent().forEach(cmd);
+    }
+
+    private CachedFile getBinkContent() {
         if (binkContent == null) {
-            binkContent = new ArrayList<>();
+            binkContent = new CachedFile();
         }
         return binkContent;
     }
 
-    public void setBinkContent(List<String> binkContent) {
-        this.binkContent = binkContent;
-    }
 
 }
