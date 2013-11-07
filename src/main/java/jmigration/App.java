@@ -6,9 +6,13 @@ import jmigration.impl.agent.ScenarioImpl;
 import jmigration.scenario.agent.Scenario;
 
 /**
- * Hello world!
+ * Main app
  */
-public class App {
+public final class App {
+
+    private App() {
+    }
+
     public static void main(String[] args) {
         Scenario scenario = new ScenarioImpl();
         scenario.setAgent(new AgentImpl());
