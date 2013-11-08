@@ -29,9 +29,9 @@
             <outputDirectory>/lib</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/src/test/resources/jmigration/impl/agent</directory>
+            <directory>${basedir}/src/test/resources/jmigration/impl</directory>
             <includes>
-                <include>*.*</include>
+                <include>*.cfg</include>
             </includes>
             <outputDirectory>/</outputDirectory>
         </fileSet>

@@ -5,10 +5,10 @@ import jmigration.common.Lambda;
 /**
  * @author Manjago (kirill@temnenkov.com)
  */
-public interface Strings {
-    void addLine(String line);
+public interface Items<E> {
+    void addLine(E item);
 
-    void forEach(Lambda<String, Void> cmd);
+    void forEach(Lambda<E, Void> cmd);
 
     boolean isEmpty();
 }

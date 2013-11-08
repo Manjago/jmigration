@@ -13,6 +13,27 @@ public class Link {
     private String port;
     private String password;
 
+    public Link() {
+    }
+
+    public Link(String stationName, String ftnAddress, String pktPassword, String host, String port, String password) {
+        this.stationName = stationName;
+        this.ftnAddress = ftnAddress;
+        this.pktPassword = pktPassword;
+        this.host = host;
+        this.port = port;
+        this.password = password;
+    }
+
+    public Link(Link link) {
+        this.stationName = link.getStationName();
+        this.ftnAddress = link.getFtnAddress();
+        this.pktPassword = link.getPktPassword();
+        this.host = link.getHost();
+        this.port = link.getPort();
+        this.password = link.getPassword();
+    }
+
     public String getFtnAddress() {
         return ftnAddress;
     }

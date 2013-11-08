@@ -1,0 +1,11 @@
+#node 2:5020/12000 fluid.fidoman.ru sdsfsdfa - D:\\BOXES\\024SSBN0.00h
+node 2:5020/1031 mvgusev.no-ip.org ffffffff
+node 2:5020/12000 fluid.fidoman.ru ffffffff - D:\\BOXES\\024SSBN0.00h 
+node 2:5020/828.17 - -nr ffffff - D:\\BOXES\\024SS0PS.0Hh 
+node 2:5020/828.18 - -nr -nomd ffffff - D:\\BOXES\\kir18
+node 2:5020/828.19 - -nr ffffff
+node 2:5020/1641 fido.t-d-g.ru -nd ffffffff - D:\\BOXES\\1641
+node 2:5020/1042 f1042.ru ffffffff - D:\\BOXES\\1042
+node 2:5020/837 nightbbs.ru ffffffff
+node 2:5020/1453 80.240.218.178 fffffff
+#defnode -nr *

@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import static jmigration.impl.Utils.getPath;
 
 /**
  * @author Kirill Temnenkov (kirill@temnenkov.com)
@@ -60,14 +61,10 @@ public class SourceResolverTest {
         a.resolveSource("0", "1", "2");
     }
 
-    private String getPath(String filename) {
-        return SourceResolverTest.class.getResource(filename).getPath();
-    }
-
     @Test
     public void testResolveGood() throws Exception {
         SourceResolver a = new SourceResolver();
-        SourceData data = a.resolveSource(getPath("binkd.cfg"), getPath("SQAFIX.CFG"), getPath("SQUISH.CFG"));
+        SourceData data = a.resolveSource(getPath("binkd.cfg"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg"));
         Assert.assertNotNull(data);
         Assert.assertFalse(data.isEmpty(ConfigType.BINK));
         Assert.assertFalse(data.isEmpty(ConfigType.SQAFIX));

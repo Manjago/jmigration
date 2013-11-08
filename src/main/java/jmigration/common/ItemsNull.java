@@ -3,13 +3,13 @@ package jmigration.common;
 /**
  * @author Manjago (kirill@temnenkov.com)
  */
-public class StringsNull implements Strings {
+public class ItemsNull<E> implements Items<E> {
     @Override
-    public void addLine(String line) {
+    public void addLine(E line) {
     }
 
     @Override
-    public void forEach(Lambda<String, Void> cmd) {
+    public void forEach(Lambda<E, Void> cmd) {
     }
 
     @Override
