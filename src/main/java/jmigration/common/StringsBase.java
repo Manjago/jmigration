@@ -1,6 +1,4 @@
-package jmigration.impl.data;
-
-import jmigration.common.Lambda;
+package jmigration.common;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +6,7 @@ import java.util.List;
 /**
  * @author Manjago (kirill@temnenkov.com)
  */
-public class CachedFileImpl implements CachedFile {
+public class StringsBase implements Strings {
     private List<String> lines;
 
     private List<String> getLines() {

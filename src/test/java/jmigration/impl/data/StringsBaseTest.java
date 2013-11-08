@@ -1,6 +1,7 @@
 package jmigration.impl.data;
 
 import jmigration.common.Lambda;
+import jmigration.common.StringsBase;
 import jmigration.impl.Utils;
 import junit.framework.Assert;
 import org.junit.Test;
@@ -10,10 +11,10 @@ import java.util.List;
 /**
  * @author Manjago (kirill@temnenkov.com)
  */
-public class CachedFileImplTest {
+public class StringsBaseTest {
     @Test
     public void testAddLine() throws Exception {
-        CachedFileImpl file = new CachedFileImpl();
+        StringsBase file = new StringsBase();
         file.addLine("1");
         file.addLine("2");
         file.addLine(null);
@@ -28,7 +29,7 @@ public class CachedFileImplTest {
 
     @Test
     public void testEmpty() throws Exception {
-        CachedFileImpl file = new CachedFileImpl();
+        StringsBase file = new StringsBase();
         file.forEach(new Lambda<String, Void>() {
             @Override
             public Void execute(String arg) {
@@ -39,7 +40,7 @@ public class CachedFileImplTest {
 
     @Test
     public void testNullForEach() throws Exception {
-        CachedFileImpl file = new CachedFileImpl();
+        StringsBase file = new StringsBase();
         file.forEach(null);
     }
 }

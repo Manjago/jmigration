@@ -1,11 +1,9 @@
-package jmigration.impl.data;
-
-import jmigration.common.Lambda;
+package jmigration.common;
 
 /**
  * @author Manjago (kirill@temnenkov.com)
  */
-public class CachedFileNull implements CachedFile {
+public class StringsNull implements Strings {
     @Override
     public void addLine(String line) {
     }
