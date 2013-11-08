@@ -5,14 +5,15 @@ import jmigration.common.Lambda;
 
 import java.util.HashMap;
 import java.util.Map;
-import static com.google.common.base.Preconditions.checkNotNull;
+
+import static jmigration.common.LameLib.checkNotNull;
 
 /**
  * @author Kirill Temnenkov (ktemnenkov@intervale.ru)
  */
-public class TargetData implements Items<Link>{
+public class TargetData implements Items<Link> {
     private Map<String, Link> getLinks() {
-        if (links == null){
+        if (links == null) {
             links = new HashMap<>();
         }
         return links;
@@ -30,11 +31,11 @@ public class TargetData implements Items<Link>{
 
     @Override
     public void forEach(Lambda<Link, Void> cmd) {
-        if (cmd == null){
+        if (cmd == null) {
             return;
         }
-        for(Link link : getLinks().values()){
-           cmd.execute(new Link(link));
+        for (Link link : getLinks().values()) {
+            cmd.execute(new Link(link));
         }
     }
 

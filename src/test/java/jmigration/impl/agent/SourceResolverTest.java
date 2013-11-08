@@ -3,12 +3,13 @@ package jmigration.impl.agent;
 import jmigration.common.Lambda;
 import jmigration.impl.data.ConfigType;
 import jmigration.impl.data.SourceData;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+
 import static jmigration.impl.Utils.getPath;
 
 /**
@@ -39,14 +40,14 @@ public class SourceResolverTest {
 
         final List<String> test = getStrings(ConfigType.BINK, context);
 
-        Assert.assertEquals(399, test.size());
-        Assert.assertEquals("#defnode -nr *", test.get(398));
+        TestCase.assertEquals(399, test.size());
+        TestCase.assertEquals("#defnode -nr *", test.get(398));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testResolveBadArgs() throws Exception {
         SourceResolver a = new SourceResolver();
-        a.resolveSource(null);
+        a.resolveSource((String) null);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -65,11 +66,11 @@ public class SourceResolverTest {
     public void testResolveGood() throws Exception {
         SourceResolver a = new SourceResolver();
         SourceData data = a.resolveSource(getPath("binkd.cfg"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg"));
-        Assert.assertNotNull(data);
-        Assert.assertFalse(data.isEmpty(ConfigType.BINK));
-        Assert.assertFalse(data.isEmpty(ConfigType.SQAFIX));
-        Assert.assertFalse(data.isEmpty(ConfigType.SQUISH));
-        Assert.assertTrue(data.isEmpty(null));
+        TestCase.assertNotNull(data);
+        TestCase.assertFalse(data.isEmpty(ConfigType.BINK));
+        TestCase.assertFalse(data.isEmpty(ConfigType.SQAFIX));
+        TestCase.assertFalse(data.isEmpty(ConfigType.SQUISH));
+        TestCase.assertTrue(data.isEmpty(null));
     }
 
 }

@@ -1,9 +1,9 @@
 package jmigration.impl.data;
 
 import jmigration.common.Items;
-import jmigration.common.Lambda;
-import jmigration.common.ItemsBase;
 import jmigration.common.ItemsNull;
+import jmigration.common.Lambda;
+import jmigration.common.Strings;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +17,7 @@ public class SourceData {
 
     public void addLine(ConfigType configType, String line) {
         if (!getContent().containsKey(configType)) {
-            getContent().put(configType, new ItemsBase<String>());
+            getContent().put(configType, new Strings());
         }
         getContent(configType).addLine(line);
     }

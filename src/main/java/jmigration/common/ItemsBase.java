@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * @author Manjago (kirill@temnenkov.com)
  */
-public class ItemsBase<E> implements Items<E> {
+public abstract class ItemsBase<E> implements Items<E> {
     private List<E> lines;
 
     private List<E> getLines() {
@@ -26,9 +26,11 @@ public class ItemsBase<E> implements Items<E> {
         }
 
         for (E line : getLines()) {
-            cmd.execute(line);
+            cmd.execute(defensiveCopy(line));
         }
     }
+
+    protected abstract E defensiveCopy(E item);
 
     @Override
     public boolean isEmpty() {
