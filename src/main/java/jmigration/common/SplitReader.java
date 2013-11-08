@@ -13,10 +13,6 @@ public class SplitReader {
     private final Lambda<String, Void> mapper;
     private final String encoding;
 
-    public SplitReader(Lambda<String, Void> mapper) {
-        this(mapper, "UTF-8");
-    }
-
     public SplitReader(Lambda<String, Void> mapper, String encoding) {
         this.mapper = mapper;
         this.encoding = encoding;

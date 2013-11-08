@@ -30,4 +30,9 @@ public class StringsBase implements Strings {
         }
     }
 
+    @Override
+    public boolean isEmpty() {
+        return lines == null || lines.size() == 0;
+    }
+
 }

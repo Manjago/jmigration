@@ -9,4 +9,6 @@ public interface Strings {
     void addLine(String line);
 
     void forEach(Lambda<String, Void> cmd);
+
+    boolean isEmpty();
 }

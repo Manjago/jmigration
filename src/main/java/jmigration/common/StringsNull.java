@@ -11,4 +11,9 @@ public class StringsNull implements Strings {
     @Override
     public void forEach(Lambda<String, Void> cmd) {
     }
+
+    @Override
+    public boolean isEmpty() {
+        return true;
+    }
 }

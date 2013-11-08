@@ -41,4 +41,8 @@ public class SourceDataImpl implements SourceData {
         return getContent().get(configType);
     }
 
+    public boolean isEmpty(ConfigType configType){
+        return getContent(configType).isEmpty();
+    }
+
 }

@@ -1,6 +1,7 @@
 package jmigration.impl;
 
 import jmigration.common.Lambda;
+import jmigration.common.Strings;
 import jmigration.common.StringsBase;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public final class Utils {
     private Utils() {
     }
 
-    public static List<String> getStrings(StringsBase file) {
+    public static List<String> getStrings(Strings file) {
         final List<String> test = new ArrayList<>();
         file.forEach(new Lambda<String, Void>() {
             @Override
