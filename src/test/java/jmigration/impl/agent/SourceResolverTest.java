@@ -1,9 +1,8 @@
 package jmigration.impl.agent;
 
 import jmigration.common.Lambda;
-import jmigration.impl.Utils;
 import jmigration.impl.data.ConfigType;
-import jmigration.impl.data.SourceDataImpl;
+import jmigration.impl.data.SourceData;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -12,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Kirill Temnenkov (ktemnenkov@intervale.ru)
+ * @author Kirill Temnenkov (kirill@temnenkov.com)
  */
-public class SourceResolverImplTest {
+public class SourceResolverTest {
 
-    private static List<String> getStrings(ConfigType configType, SourceDataImpl file) {
+    private static List<String> getStrings(ConfigType configType, SourceData file) {
         final List<String> test = new ArrayList<>();
         file.forEach(configType, new Lambda<String, Void>() {
             @Override
@@ -31,10 +30,10 @@ public class SourceResolverImplTest {
     @Test
     public void testLoadFile() throws Exception {
 
-        SourceResolverImpl resolver = new SourceResolverImpl();
+        SourceResolver resolver = new SourceResolver();
 
 
-        final SourceDataImpl context = new SourceDataImpl();
+        final SourceData context = new SourceData();
         resolver.loadConfig(context, ConfigType.BINK, getPath("binkd.cfg"));
 
         final List<String> test = getStrings(ConfigType.BINK, context);
@@ -45,30 +44,30 @@ public class SourceResolverImplTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testResolveBadArgs() throws Exception {
-        SourceResolverImpl a = new SourceResolverImpl();
+        SourceResolver a = new SourceResolver();
         a.resolveSource(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testResolveBadArgs2() throws Exception {
-        SourceResolverImpl a = new SourceResolverImpl();
+        SourceResolver a = new SourceResolver();
         a.resolveSource("0", "1");
     }
 
     @Test(expected = FileNotFoundException.class)
     public void testResolveBadArgs3() throws Exception {
-        SourceResolverImpl a = new SourceResolverImpl();
+        SourceResolver a = new SourceResolver();
         a.resolveSource("0", "1", "2");
     }
 
     private String getPath(String filename) {
-        return SourceResolverImplTest.class.getResource(filename).getPath();
+        return SourceResolverTest.class.getResource(filename).getPath();
     }
 
     @Test
     public void testResolveGood() throws Exception {
-        SourceResolverImpl a = new SourceResolverImpl();
-        SourceDataImpl data = a.resolveSource(getPath("binkd.cfg"), getPath("SQAFIX.CFG"), getPath("SQUISH.CFG"));
+        SourceResolver a = new SourceResolver();
+        SourceData data = a.resolveSource(getPath("binkd.cfg"), getPath("SQAFIX.CFG"), getPath("SQUISH.CFG"));
         Assert.assertNotNull(data);
         Assert.assertFalse(data.isEmpty(ConfigType.BINK));
         Assert.assertFalse(data.isEmpty(ConfigType.SQAFIX));

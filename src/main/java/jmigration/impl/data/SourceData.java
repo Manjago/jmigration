@@ -4,15 +4,14 @@ import jmigration.common.Lambda;
 import jmigration.common.Strings;
 import jmigration.common.StringsBase;
 import jmigration.common.StringsNull;
-import jmigration.scenario.data.SourceData;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Kirill Temnenkov (ktemnenkov@intervale.ru)
+ * @author Kirill Temnenkov (kirill@temnenkov.com)
  */
-public class SourceDataImpl implements SourceData {
+public class SourceData {
 
     private Map<ConfigType, Strings> content;
 
@@ -41,7 +40,7 @@ public class SourceDataImpl implements SourceData {
         return getContent().get(configType);
     }
 
-    public boolean isEmpty(ConfigType configType){
+    public boolean isEmpty(ConfigType configType) {
         return getContent(configType).isEmpty();
     }
 

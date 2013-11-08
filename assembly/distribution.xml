@@ -28,5 +28,12 @@
             </includes>
             <outputDirectory>/lib</outputDirectory>
         </fileSet>
+        <fileSet>
+            <directory>${basedir}/src/test/resources/jmigration/impl/agent</directory>
+            <includes>
+                <include>*.*</include>
+            </includes>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
     </fileSets>
 </assembly>

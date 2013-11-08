@@ -16,4 +16,5 @@ public class StringsNull implements Strings {
     public boolean isEmpty() {
         return true;
     }
+
 }

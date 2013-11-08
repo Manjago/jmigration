@@ -35,4 +35,11 @@ public class StringsBase implements Strings {
         return lines == null || lines.size() == 0;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("StringsBase{");
+        sb.append("lines count=").append(lines != null ? lines.size() : 0);
+        sb.append('}');
+        return sb.toString();
+    }
 }

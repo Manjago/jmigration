@@ -1,1 +1,1 @@
-java -Dlogback.configurationFile=logback.xml -jar jmigration-1.0-SNAPSHOT.jar
+java -Dlogback.configurationFile=logback.xml -jar jmigration-1.0-SNAPSHOT.jar binkd.cfg SQAFIX.CFG SQUISH.CFG
