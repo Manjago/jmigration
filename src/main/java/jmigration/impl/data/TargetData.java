@@ -61,4 +61,22 @@ public class TargetData implements Items<Link> {
     public boolean isEmpty() {
         return links == null || links.isEmpty();
     }
+
+    public void smooth() {
+        for (Link link : getLinks().values()) {
+
+            if (link.getPktPassword() == null) {
+                link.setPktPassword(link.getPassword());
+            }
+
+            if (link.getPort() == null) {
+                link.setPort(link.getHost() == null || link.getHost().isEmpty() ? "0" : "24554");
+            }
+
+            if (link.getStationName() == null) {
+                link.setStationName(link.getFtnAddress());
+            }
+
+        }
+    }
 }

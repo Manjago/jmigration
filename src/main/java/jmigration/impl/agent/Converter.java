@@ -13,6 +13,7 @@ import static jmigration.common.LameLib.checkNotNull;
  * @author Kirill Temnenkov (ktemnenkov@intervale.ru)
  */
 public class Converter {
+
     public void convert(SourceData sourceData, final TargetData targetData) {
         checkNotNull(sourceData);
         checkNotNull(targetData);
@@ -53,5 +54,7 @@ public class Converter {
                     }
                 }
         );
+
+        targetData.smooth();
     }
 }

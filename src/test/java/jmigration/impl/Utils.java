@@ -2,7 +2,11 @@ package jmigration.impl;
 
 import jmigration.common.Items;
 import jmigration.common.Lambda;
+import org.apache.commons.io.IOUtil;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,4 +34,9 @@ public final class Utils {
         return Utils.class.getResource(filename).getPath();
     }
 
+    public static String inputStreamToString(InputStream is) throws IOException {
+        StringWriter writer = new StringWriter();
+        IOUtil.copy(is, writer, "UTF-8");
+        return writer.toString();
+    }
 }
