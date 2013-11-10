@@ -8,4 +8,5 @@ node 2:5020/1641 fido.t-d-g.ru -nd 6fffffff6 - D:\\BOXES\\1641
 node 2:5020/1042 f1042.ru 7fffffff7 - D:\\BOXES\\1042
 node 2:5020/837 nightbbs.ru 8fffffff8
 node 2:5020/1453 80.240.218.178 9ffffff9
+node fuuflo
 #defnode -nr *

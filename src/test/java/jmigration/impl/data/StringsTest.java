@@ -1,9 +1,6 @@
 package jmigration.impl.data;
 
-import jmigration.common.Items;
-import jmigration.common.ItemsNull;
-import jmigration.common.Lambda;
-import jmigration.common.Strings;
+import jmigration.common.*;
 import jmigration.impl.Utils;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -52,9 +49,64 @@ public class StringsTest {
     }
 
     @Test
+    public void testNullArgForEachPredicate1() throws Exception {
+        Items<String> file = new Strings();
+        file.forEach(null, null);
+        TestCase.assertTrue(file.isEmpty());
+    }
+
+    @Test
+    public void testNullArgForEachPredicate2() throws Exception {
+        Items<String> file = new Strings();
+        file.forEach(new Predicate<String>() {
+            @Override
+            public boolean passed(String item) {
+                return true;
+            }
+        }, null);
+        TestCase.assertTrue(file.isEmpty());
+    }
+
+    @Test
+    public void testPredicate() throws Exception {
+        Items<String> file = new Strings();
+        file.addLine("1");
+        file.addLine("2");
+        file.addLine(null);
+        final int[] i = {0};
+        file.forEach(new Predicate<String>() {
+                         @Override
+                         public boolean passed(String item) {
+                             return item != null && item.equals("2");
+                         }
+                     }, new Lambda<String, Void>() {
+                         @Override
+                         public Void execute(String arg) {
+                             ++i[0];
+                             return null;
+                         }
+                     }
+        );
+        TestCase.assertFalse(file.isEmpty());
+        TestCase.assertEquals(1, i[0]);
+    }
+
+    @Test
     public void testNullForEach() throws Exception {
         Items<String> file = new ItemsNull<>();
         file.forEach(null);
+        TestCase.assertTrue(file.isEmpty());
+    }
+
+    @Test
+    public void testNullTrueForEach() throws Exception {
+        Items<String> file = new ItemsNull<>();
+        file.forEach(new Predicate<String>() {
+            @Override
+            public boolean passed(String item) {
+                return false;
+            }
+        }, null);
         TestCase.assertTrue(file.isEmpty());
     }
 
