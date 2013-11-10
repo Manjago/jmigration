@@ -17,7 +17,7 @@ public abstract class ItemsBase<E> implements Items<E> {
     }
 
     public void addLine(E line) {
-        getLines().add(line);
+        getLines().add(line == null ? null : defensiveCopy(line));
     }
 
     public void forEach(Lambda<E, Void> cmd) {
@@ -27,6 +27,23 @@ public abstract class ItemsBase<E> implements Items<E> {
 
         for (E line : getLines()) {
             cmd.execute(defensiveCopy(line));
+        }
+    }
+
+    @Override
+    public void forEach(Predicate<E> predicate, Lambda<E, Void> cmd) {
+        if (cmd == null) {
+            return;
+        }
+
+        if (predicate == null) {
+            forEach(cmd);
+        } else {
+            for (E line : getLines()) {
+                if (predicate.passed(line)) {
+                    cmd.execute(defensiveCopy(line));
+                }
+            }
         }
     }
 

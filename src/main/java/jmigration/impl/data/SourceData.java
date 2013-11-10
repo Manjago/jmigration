@@ -1,9 +1,6 @@
 package jmigration.impl.data;
 
-import jmigration.common.Items;
-import jmigration.common.ItemsNull;
-import jmigration.common.Lambda;
-import jmigration.common.Strings;
+import jmigration.common.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +21,10 @@ public class SourceData {
 
     public void forEach(ConfigType configType, Lambda<String, Void> cmd) {
         getContent(configType).forEach(cmd);
+    }
+
+    public void forEach(ConfigType configType, Predicate<String> predicate, Lambda<String, Void> cmd) {
+        getContent(configType).forEach(predicate, cmd);
     }
 
     private Map<ConfigType, Items<String>> getContent() {

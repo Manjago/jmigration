@@ -1,11 +1,11 @@
 #node 2:5020/12000 fluid.fidoman.ru sdsfsdfa - D:\\BOXES\\024SSBN0.00h
-node 2:5020/1031 mvgusev.no-ip.org fffffff1
-node 2:5020/12000 fluid.fidoman.ru fffffff2 - D:\\BOXES\\024SSBN0.00h
-node 2:5020/828.17 - -nr fffff3 - D:\\BOXES\\024SS0PS.0Hh
-node 2:5020/828.18 - -nr -nomd fffff4 - D:\\BOXES\\kir18
-node 2:5020/828.19 - -nr fffff5
-node 2:5020/1641 fido.t-d-g.ru -nd fffffff6 - D:\\BOXES\\1641
-node 2:5020/1042 f1042.ru fffffff7 - D:\\BOXES\\1042
-node 2:5020/837 nightbbs.ru fffffff8
-node 2:5020/1453 80.240.218.178 ffffff9
+node 2:5020/1031 mvgusev.no-ip.org 1fffffff1
+node 2:5020/12000 fluid.fidoman.ru 2fffffff2 - D:\\BOXES\\024SSBN0.00h
+node 2:5020/828.17 - -nr 3fffff3 - D:\\BOXES\\024SS0PS.0Hh
+node 2:5020/828.18 - -nr -nomd 4fffff4 - D:\\BOXES\\kir18
+node 2:5020/828.19 - -nr 5fffff5
+node 2:5020/1641 fido.t-d-g.ru -nd 6fffffff6 - D:\\BOXES\\1641
+node 2:5020/1042 f1042.ru 7fffffff7 - D:\\BOXES\\1042
+node 2:5020/837 nightbbs.ru 8fffffff8
+node 2:5020/1453 80.240.218.178 9ffffff9
 #defnode -nr *

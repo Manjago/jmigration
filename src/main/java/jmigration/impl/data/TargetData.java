@@ -2,6 +2,7 @@ package jmigration.impl.data;
 
 import jmigration.common.Items;
 import jmigration.common.Lambda;
+import jmigration.common.Predicate;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class TargetData implements Items<Link> {
         checkNotNull(link);
         checkNotNull(link.getFtnAddress());
 
-        getLinks().put(link.getFtnAddress(), link);
+        getLinks().put(link.getFtnAddress(), new Link(link));
     }
 
     @Override
@@ -37,6 +38,23 @@ public class TargetData implements Items<Link> {
         for (Link link : getLinks().values()) {
             cmd.execute(new Link(link));
         }
+    }
+
+    @Override
+    public void forEach(Predicate<Link> predicate, Lambda<Link, Void> cmd) {
+        if (cmd == null) {
+            return;
+        }
+        if (predicate == null) {
+            forEach(cmd);
+        } else {
+            for (Link link : getLinks().values()) {
+                if (predicate.passed(link)) {
+                    cmd.execute(new Link(link));
+                }
+            }
+        }
+
     }
 
     @Override
