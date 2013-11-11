@@ -2,7 +2,7 @@ package jmigration.impl.agent;
 
 import jmigration.common.FreemarkerRunner;
 import jmigration.impl.Utils;
-import jmigration.impl.data.Link;
+import jmigration.impl.data.items.Link;
 import jmigration.impl.data.SourceData;
 import jmigration.impl.data.TargetData;
 import junit.framework.TestCase;
@@ -32,7 +32,7 @@ public class ConverterTest {
         TargetData targetData = new TargetData();
         converter.convert(data, targetData);
 
-        items = Utils.getItems(targetData);
+        items = Utils.getItems(targetData.asLinks());
         TestCase.assertEquals(9, items.size());
 
         Collections.sort(items, new Comparator<Link>() {

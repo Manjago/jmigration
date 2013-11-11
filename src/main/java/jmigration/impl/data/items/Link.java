@@ -1,4 +1,4 @@
-package jmigration.impl.data;
+package jmigration.impl.data.items;
 
 /**
  * Link
@@ -14,15 +14,6 @@ public class Link {
     private String password;
 
     public Link() {
-    }
-
-    public Link(String stationName, String ftnAddress, String pktPassword, String host, String port, String password) {
-        this.stationName = stationName;
-        this.ftnAddress = ftnAddress;
-        this.pktPassword = pktPassword;
-        this.host = host;
-        this.port = port;
-        this.password = password;
     }
 
     public Link(Link link) {

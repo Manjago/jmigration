@@ -3,7 +3,7 @@ package jmigration.impl.agent;
 import jmigration.common.Lambda;
 import jmigration.common.Predicate;
 import jmigration.impl.data.ConfigType;
-import jmigration.impl.data.Link;
+import jmigration.impl.data.items.Link;
 import jmigration.impl.data.SourceData;
 import jmigration.impl.data.TargetData;
 

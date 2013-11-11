@@ -1,7 +1,6 @@
 package jmigration.impl.data.items;
 
 import jmigration.common.ItemsBase;
-import jmigration.impl.data.Link;
 
 /**
  * @author Kirill Temnenkov (ktemnenkov@intervale.ru)
