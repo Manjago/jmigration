@@ -13,7 +13,7 @@ public class LameLibTest {
         checkNotNull("1");
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testCheckNotNull2() throws Exception {
         checkNotNull(null);
     }
@@ -23,7 +23,7 @@ public class LameLibTest {
         checkNotNull("1", "2");
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testCheckNotNullExtBad() throws Exception {
         checkNotNull(null, "2");
     }

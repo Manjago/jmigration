@@ -9,14 +9,14 @@ public final class LameLib {
 
     public static <T> T checkNotNull(T reference) {
         if (reference == null) {
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
         }
         return reference;
     }
 
     public static <T> T checkNotNull(T reference, Object errorMessage) {
         if (reference == null) {
-            throw new NullPointerException(String.valueOf(errorMessage));
+            throw new IllegalArgumentException(String.valueOf(errorMessage));
         }
         return reference;
     }
