@@ -19,7 +19,7 @@ import static jmigration.impl.Utils.getPath;
 /**
  * @author Kirill Temnenkov (ktemnenkov@intervale.ru)
  */
-public class ConverterTest {
+public class BinkConverterTest {
 
     private List<Link> items;
 

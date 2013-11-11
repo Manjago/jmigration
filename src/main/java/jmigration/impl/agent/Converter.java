@@ -3,9 +3,10 @@ package jmigration.impl.agent;
 import jmigration.common.Lambda;
 import jmigration.common.Predicate;
 import jmigration.impl.data.ConfigType;
-import jmigration.impl.data.items.Link;
 import jmigration.impl.data.SourceData;
 import jmigration.impl.data.TargetData;
+import jmigration.impl.data.items.EchoArea;
+import jmigration.impl.data.items.Link;
 
 import static jmigration.common.LameLib.checkNotNull;
 
@@ -18,12 +19,38 @@ public class Converter {
         checkNotNull(sourceData);
         checkNotNull(targetData);
 
+        // какие у нас есть живые (то есть из бинк) линки
         sourceData.forEach(ConfigType.BINK, new Predicate<String>() {
             @Override
             public boolean passed(String item) {
                 return item != null && item.startsWith("node ");
             }
         }, new ParseBinkString(targetData)
+        );
+
+        // пока что просто берем айдишники - и даже без названий
+        sourceData.forEach(ConfigType.SQUISH, new Predicate<String>() {
+                    @Override
+                    public boolean passed(String item) {
+                        return item != null && item.startsWith("EchoArea ");
+                    }
+                }, new Lambda<String, Void>() {
+                    @Override
+                    public Void execute(String arg) {
+                        String[] s = arg.split("\\s");
+                        if (s.length < 2){
+                            return null;
+                        }
+
+                        String id = s[1];
+                        EchoArea echoArea = new EchoArea();
+                        echoArea.setName(id);
+
+                        targetData.addArea(echoArea);
+
+                        return null;
+                    }
+                }
         );
 
         targetData.smooth();
@@ -60,7 +87,7 @@ public class Converter {
                 link.setFtnAddress(ftnAddress);
                 link.setHost(host);
                 link.setPassword(pwd);
-                targetData.addItem(link);
+                targetData.addLink(link);
             }
 
             return null;

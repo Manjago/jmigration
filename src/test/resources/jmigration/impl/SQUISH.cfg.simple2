@@ -1,0 +1,19 @@
+;;EchoArea        TUB             C:\Max\Msg\Tub          1:123/99
+
+; The second line defines an EchoMail area called 'MUFFIN', which uses
+; the Squish format (because of the '-$') in the files called
+; C:\Max\Msg\Muffin.Sq?.  This echo is also scanned to 1:123/99.
+
+;EchoArea        MUFFIN          C:\Max\Msg\Muffin  -$   1:123/99
+; As many EchoMail areas can be added as you like.  Just make sure to
+; add the appropriate flags, including -$ for Squish-format areas,
+; and you should be all set.
+
+;                               ###
+
+;NewAreaPlace
+EchoArea 5020-828.FORWARDS             K:\POST\5020-828\FORWARDS	 2:5020/828 2:6000/8632
+EchoArea 5020-828.LOCAL                K:\POST\5020-828\LOCAL	 2:5020/828 2:6000/8632
+EchoArea 5020-828.OFFICIAL             K:\POST\5020-828\OFFICIAL	 2:5020/828 2:6000/8632
+EchoArea RU.SPORT.OTHER                K:\POST\RU\SPORT\OTHER	-0 -$ -$d60	 2:5020/828.777 2:5020/1042 2:6000/8632
+EchoArea 828.Robots     k:\post\828\robot  -$ -$d14     -x2:5020/828.2 -x2:5020/828.245 -x2:5020/828.46 -x2:5020/828.88 -x2:5020/828.8  -x2:5020/828.22 -x2:5020/828.5 -x2:5020/828.696 -x2:5020/828.77 -x2:5020/828.128  -x2:5020/828.44 -x2:5020/828.10  -x2:5020/828.82  -x2:5020/828.27 -x2:5020/828.70 -x2:5020/828.3  -x2:5020/828.7  -x2:5020/828.14 -x2:5020/828.16  -x2:5020/828.777 -x2:5020/828.973	 2:5020/828 2:5020/828.10 2:5020/828.14 2:5020/828.16 2:5020/828.17 2:5020/828.67 2:5020/828.128 2:5020/828.777 2:5020/828.1337 2:5020/5052 2:5030/1111 2:6000/8632
