@@ -1,18 +1,23 @@
 package jmigration.impl.data;
 
 import jmigration.common.Items;
-import jmigration.impl.data.items.EchoArea;
-import jmigration.impl.data.items.ItemsEchoArea;
-import jmigration.impl.data.items.ItemsLink;
-import jmigration.impl.data.items.Link;
+import jmigration.impl.data.items.*;
 
 /**
- * @author Kirill Temnenkov (ktemnenkov@intervale.ru)
+ * @author Kirill Temnenkov (kirill@temnenkov.com)
  */
 public class TargetData {
 
     private ItemsLink links;
     private ItemsEchoArea areas;
+    private ItemsSubscr subscr;
+
+    public ItemsSubscr getSubscr() {
+        if (subscr == null) {
+            subscr = new ItemsSubscr();
+        }
+        return subscr;
+    }
 
     public Items<Link> asLinks() {
         return getLinks();
@@ -20,6 +25,10 @@ public class TargetData {
 
     public Items<EchoArea> asAreas() {
         return getAreas();
+    }
+
+    public Items<Subscr> asSubscr() {
+        return getSubscr();
     }
 
     private ItemsLink getLinks() {
@@ -42,6 +51,10 @@ public class TargetData {
 
     public void addArea(EchoArea echoArea) {
         getAreas().addItem(echoArea);
+    }
+
+    public void addSubscr(Subscr subscr) {
+        getSubscr().addItem(subscr);
     }
 
     public void smooth() {

@@ -3,7 +3,7 @@ package jmigration.impl.data.items;
 import jmigration.common.ItemsBase;
 
 /**
- * @author Kirill Temnenkov (ktemnenkov@intervale.ru)
+ * @author Kirill Temnenkov (kirill@temnenkov.com)
  */
 public class ItemsEchoArea extends ItemsBase<EchoArea> {
     @Override

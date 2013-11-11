@@ -17,7 +17,7 @@ import java.util.*;
 import static jmigration.impl.Utils.getPath;
 
 /**
- * @author Kirill Temnenkov (ktemnenkov@intervale.ru)
+ * @author Kirill Temnenkov (kirill@temnenkov.com)
  */
 public class BinkConverterTest {
 

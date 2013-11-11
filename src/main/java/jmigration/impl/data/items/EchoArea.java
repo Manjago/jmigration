@@ -1,7 +1,9 @@
 package jmigration.impl.data.items;
 
+import java.util.Locale;
+
 /**
- * @author Kirill Temnenkov (ktemnenkov@intervale.ru)
+ * @author Kirill Temnenkov (kirill@temnenkov.com)
  */
 public class EchoArea {
     private String name;
@@ -20,7 +22,7 @@ public class EchoArea {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name != null ? name.toUpperCase(Locale.ENGLISH) : null;
     }
 
     public String getDesc() {
