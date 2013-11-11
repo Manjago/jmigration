@@ -11,6 +11,15 @@ public class TargetData {
     private ItemsLink links;
     private ItemsEchoArea areas;
     private ItemsSubscr subscr;
+    private String mainUplink;
+
+    public String getMainUplink() {
+        return mainUplink;
+    }
+
+    public void setMainUplink(String mainUplink) {
+        this.mainUplink = mainUplink;
+    }
 
     public ItemsSubscr getSubscr() {
         if (subscr == null) {

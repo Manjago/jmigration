@@ -25,6 +25,8 @@ public class Converter {
         checkNotNull(sourceData);
         checkNotNull(targetData);
 
+        targetData.setMainUplink(sourceData.getMainUplink());
+
         final Set<String> activeLinks = new HashSet<>();
 
         // какие у нас есть живые (то есть из бинк) линки

@@ -1,20 +1,17 @@
 package jmigration.impl.agent;
 
-import jmigration.common.FreemarkerRunner;
 import jmigration.impl.Utils;
 import jmigration.impl.data.SourceData;
 import jmigration.impl.data.TargetData;
 import jmigration.impl.data.items.EchoArea;
-import jmigration.impl.data.items.Link;
 import jmigration.impl.data.items.Subscr;
 import junit.framework.TestCase;
-import org.apache.commons.vfs2.FileObject;
-import org.apache.commons.vfs2.impl.StandardFileSystemManager;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import static jmigration.impl.Utils.getPath;
 
@@ -29,7 +26,7 @@ public class SquishConverterTest {
     @Before
     public void setUp() throws Exception {
         SourceResolver a = new SourceResolver();
-        SourceData data = a.resolveSource(getPath("binkd.cfg"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg.simple2"));
+        SourceData data = a.resolveSource(getPath("binkd.cfg"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg.simple2"), "2:5020/1042");
 
         Converter converter = new Converter();
         TargetData targetData = new TargetData();
@@ -50,7 +47,7 @@ public class SquishConverterTest {
             @Override
             public int compare(Subscr o1, Subscr o2) {
                 int temp = o1.getArea().compareTo(o2.getArea());
-                if (temp != 0){
+                if (temp != 0) {
                     return temp;
                 }
 
@@ -75,7 +72,6 @@ public class SquishConverterTest {
         TestCase.assertEquals("5020-828.OFFICIAL", areas.get(2).getDesc());
         TestCase.assertEquals("828.Robots", areas.get(3).getDesc());
         TestCase.assertEquals("Споpт вообще", areas.get(4).getDesc());
-
 
 
         TestCase.assertEquals("5020-828.FORWARDS", subscrs.get(0).getArea());
@@ -116,7 +112,6 @@ public class SquishConverterTest {
         TestCase.assertEquals("2:5020/828.777", subscrs.get(15).getNode());
         TestCase.assertEquals("RU.SPORT.OTHER", subscrs.get(16).getArea());
         TestCase.assertEquals("2:6000/8632", subscrs.get(16).getNode());
-
 
 
     }

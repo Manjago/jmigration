@@ -5,7 +5,7 @@ package jmigration.impl;
  */
 public interface Const {
     /**
-     * Количество анализируемых конь-фигурационных файлов
+     * Количество параметров
      */
-    int CFG_COUNT = 3;
+    int CFG_COUNT = 4;
 }

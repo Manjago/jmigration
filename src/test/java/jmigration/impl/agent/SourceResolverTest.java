@@ -44,28 +44,16 @@ public class SourceResolverTest {
         TestCase.assertEquals("#defnode -nr *", test.get(398));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testResolveBadArgs() throws Exception {
-        SourceResolver a = new SourceResolver();
-        a.resolveSource((String) null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testResolveBadArgs2() throws Exception {
-        SourceResolver a = new SourceResolver();
-        a.resolveSource("0", "1");
-    }
-
     @Test(expected = FileNotFoundException.class)
     public void testResolveBadArgs3() throws Exception {
         SourceResolver a = new SourceResolver();
-        a.resolveSource("0", "1", "2");
+        a.resolveSource("0", "1", "2", "2:5020/1042");
     }
 
     @Test
     public void testResolveGood() throws Exception {
         SourceResolver a = new SourceResolver();
-        SourceData data = a.resolveSource(getPath("binkd.cfg"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg"));
+        SourceData data = a.resolveSource(getPath("binkd.cfg"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg"), "2:5020/1042");
         TestCase.assertNotNull(data);
         TestCase.assertFalse(data.isEmpty(ConfigType.BINK));
         TestCase.assertFalse(data.isEmpty(ConfigType.SQAFIX));

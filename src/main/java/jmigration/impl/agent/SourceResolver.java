@@ -2,7 +2,6 @@ package jmigration.impl.agent;
 
 import jmigration.common.Lambda;
 import jmigration.common.SplitReader;
-import jmigration.impl.Const;
 import jmigration.impl.data.ConfigType;
 import jmigration.impl.data.SourceData;
 
@@ -13,26 +12,26 @@ import java.io.FileNotFoundException;
  * @author Manjago (kirill@temnenkov.com)
  */
 public class SourceResolver {
-    public SourceData resolveSource(String... args) throws FileNotFoundException {
+    public SourceData resolveSource(String bink, String sqafix, String squish, String mainUplink) throws FileNotFoundException {
 
-        if (args == null || args.length != Const.CFG_COUNT) {
-            throw new IllegalArgumentException();
-        }
-
-        for (String path : args) {
-            File file = new File(path);
-            if (!file.exists()) {
-                throw new FileNotFoundException(path + " not found");
-            }
-        }
+        testPath(bink);
+        testPath(sqafix);
+        testPath(squish);
 
         SourceData result = new SourceData();
 
-        loadConfig(result, ConfigType.BINK, args[0]);
-        loadConfig(result, ConfigType.SQAFIX, args[1]);
-        loadConfig(result, ConfigType.SQUISH, args[2]);
+        loadConfig(result, ConfigType.BINK, bink);
+        loadConfig(result, ConfigType.SQAFIX, sqafix);
+        loadConfig(result, ConfigType.SQUISH, squish);
+        result.setMainUplink(mainUplink);
 
         return result;
+    }
+
+    private void testPath(String bink) throws FileNotFoundException {
+        if (!new File(bink).exists()) {
+            throw new FileNotFoundException(bink + " not found");
+        }
     }
 
     void loadConfig(final SourceData sourceData, final ConfigType configType, String path) {

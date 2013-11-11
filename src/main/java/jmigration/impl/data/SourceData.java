@@ -11,6 +11,15 @@ import java.util.Map;
 public class SourceData {
 
     private Map<ConfigType, Items<String>> content;
+    private String mainUplink;
+
+    public String getMainUplink() {
+        return mainUplink;
+    }
+
+    public void setMainUplink(String mainUplink) {
+        this.mainUplink = mainUplink;
+    }
 
     public void addLine(ConfigType configType, String line) {
         if (!getContent().containsKey(configType)) {

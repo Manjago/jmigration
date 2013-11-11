@@ -26,7 +26,7 @@ public class BinkConverterTest {
     @Before
     public void setUp() throws Exception {
         SourceResolver a = new SourceResolver();
-        SourceData data = a.resolveSource(getPath("binkd.cfg.simple1"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg"));
+        SourceData data = a.resolveSource(getPath("binkd.cfg.simple1"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg"), "2:5020/1042");
 
         Converter converter = new Converter();
         TargetData targetData = new TargetData();
@@ -109,7 +109,7 @@ public class BinkConverterTest {
     }
 
     @Test
-    public void testExport() throws Exception {
+    public void testExportLinks() throws Exception {
 
 
         StandardFileSystemManager manager = new StandardFileSystemManager();
@@ -135,4 +135,29 @@ public class BinkConverterTest {
 
     }
 
+    @Test
+    public void testExportLinksOptions() throws Exception {
+
+        StandardFileSystemManager manager = new StandardFileSystemManager();
+        manager.init();
+        manager.resolveFile("ram://root/file2.txt").createFile();
+        FileObject fo = manager.resolveFile("ram://root/file2.txt");
+        OutputStream os = fo.getContent().getOutputStream();
+
+        Writer out = new OutputStreamWriter(os);
+
+        Map<String, Object> root = new HashMap<>();
+        root.put("links", items);
+
+        FreemarkerRunner.runReport("linksoptions.sql.ftl", root, out);
+
+        InputStream is = fo.getContent().getInputStream();
+        String runString = Utils.inputStreamToString(is);
+
+        InputStream isTest = new FileInputStream(Utils.getPath("linksoptions.sql.txt"));
+        String testString = Utils.inputStreamToString(isTest);
+
+        TestCase.assertEquals(testString, runString);
+
+    }
 }
