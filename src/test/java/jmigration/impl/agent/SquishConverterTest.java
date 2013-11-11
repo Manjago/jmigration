@@ -54,5 +54,12 @@ public class SquishConverterTest {
         TestCase.assertEquals("828.Robots", areas.get(3).getName());
         TestCase.assertEquals("RU.SPORT.OTHER", areas.get(4).getName());
 
+        TestCase.assertEquals("5020-828.FORWARDS", areas.get(0).getDesc());
+        TestCase.assertEquals("5020-828.LOCAL", areas.get(1).getDesc());
+        TestCase.assertEquals("5020-828.OFFICIAL", areas.get(2).getDesc());
+        TestCase.assertEquals("828.Robots", areas.get(3).getDesc());
+        TestCase.assertEquals("Споpт вообще", areas.get(4).getDesc());
+        
     }
+
 }

@@ -8,6 +8,9 @@ import jmigration.impl.data.TargetData;
 import jmigration.impl.data.items.EchoArea;
 import jmigration.impl.data.items.Link;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static jmigration.common.LameLib.checkNotNull;
 
 /**
@@ -28,6 +31,11 @@ public class Converter {
         }, new ParseBinkString(targetData)
         );
 
+        // получим карту названий
+        final Map<String, String> names = new HashMap<>();
+        determineNames(sourceData, names);
+
+
         // пока что просто берем айдишники - и даже без названий
         sourceData.forEach(ConfigType.SQUISH, new Predicate<String>() {
                     @Override
@@ -38,13 +46,14 @@ public class Converter {
                     @Override
                     public Void execute(String arg) {
                         String[] s = arg.split("\\s");
-                        if (s.length < 2){
+                        if (s.length < 2) {
                             return null;
                         }
 
                         String id = s[1];
                         EchoArea echoArea = new EchoArea();
                         echoArea.setName(id);
+                        echoArea.setDesc(names.containsKey(id) ? names.get(id) : id);
 
                         targetData.addArea(echoArea);
 
@@ -54,6 +63,16 @@ public class Converter {
         );
 
         targetData.smooth();
+    }
+
+    void determineNames(SourceData sourceData, final Map<String, String> names) {
+        sourceData.forEach(ConfigType.SQAFIX, new Predicate<String>() {
+            @Override
+            public boolean passed(String item) {
+                return item != null && item.startsWith("EchoArea ");
+            }
+        }, new DeternineNames(names)
+        );
     }
 
     private static class ParseBinkString implements Lambda<String, Void> {
@@ -89,6 +108,43 @@ public class Converter {
                 link.setPassword(pwd);
                 targetData.addLink(link);
             }
+
+            return null;
+        }
+    }
+
+    private static class DeternineNames implements Lambda<String, Void> {
+        private static final int MIN_TOKENS_COUNT = 3;
+        private final Map<String, String> names;
+
+        public DeternineNames(Map<String, String> names) {
+            this.names = names;
+        }
+
+        @Override
+        public Void execute(String arg) {
+
+            String[] s = arg.split("\\s");
+            if (s.length < MIN_TOKENS_COUNT) {
+                return null;
+            }
+
+            String id = s[1];
+            String name = id;
+
+            if (s.length > MIN_TOKENS_COUNT) {
+
+                String[] s2 = arg.split("\u0009");
+                if (s2.length > 1) {
+                    String pretender = s2[1];
+                    if (pretender.startsWith("\"") && pretender.endsWith("\"")) {
+                        name = pretender.substring(1, pretender.length() - 1);
+                    }
+                }
+
+            }
+
+            names.put(id, name);
 
             return null;
         }
