@@ -1,20 +1,20 @@
 -- links
 DELETE FROM links;
 INSERT INTO links (station_name, ftn_address, pkt_password, host, port, password)
-VALUES ('2:5020/1031', '2:5020/1031', '1fffffff1', 'mvgusev.no-ip.org', 24554, '1fffffff1);
+VALUES ('2:5020/1031', '2:5020/1031', '1fffffff1', 'mvgusev.no-ip.org', 24554, '1fffffff1');
 INSERT INTO links (station_name, ftn_address, pkt_password, host, port, password)
-VALUES ('2:5020/12000', '2:5020/12000', '2fffffff2', 'fluid.fidoman.ru', 24554, '2fffffff2);
+VALUES ('2:5020/12000', '2:5020/12000', '2fffffff2', 'fluid.fidoman.ru', 24554, '2fffffff2');
 INSERT INTO links (station_name, ftn_address, pkt_password, host, port, password)
-VALUES ('2:5020/828.17', '2:5020/828.17', '3fffff3', '', 0, '3fffff3);
+VALUES ('2:5020/828.17', '2:5020/828.17', '3fffff3', '', 0, '3fffff3');
 INSERT INTO links (station_name, ftn_address, pkt_password, host, port, password)
-VALUES ('2:5020/828.18', '2:5020/828.18', '4fffff4', '', 0, '4fffff4);
+VALUES ('2:5020/828.18', '2:5020/828.18', '4fffff4', '', 0, '4fffff4');
 INSERT INTO links (station_name, ftn_address, pkt_password, host, port, password)
-VALUES ('2:5020/828.19', '2:5020/828.19', '5fffff5', '', 0, '5fffff5);
+VALUES ('2:5020/828.19', '2:5020/828.19', '5fffff5', '', 0, '5fffff5');
 INSERT INTO links (station_name, ftn_address, pkt_password, host, port, password)
-VALUES ('2:5020/1641', '2:5020/1641', '6fffffff6', 'fido.t-d-g.ru', 24554, '6fffffff6);
+VALUES ('2:5020/1641', '2:5020/1641', '6fffffff6', 'fido.t-d-g.ru', 24554, '6fffffff6');
 INSERT INTO links (station_name, ftn_address, pkt_password, host, port, password)
-VALUES ('2:5020/1042', '2:5020/1042', '7fffffff7', 'f1042.ru', 24554, '7fffffff7);
+VALUES ('2:5020/1042', '2:5020/1042', '7fffffff7', 'f1042.ru', 24554, '7fffffff7');
 INSERT INTO links (station_name, ftn_address, pkt_password, host, port, password)
-VALUES ('2:5020/837', '2:5020/837', '8fffffff8', 'nightbbs.ru', 24554, '8fffffff8);
+VALUES ('2:5020/837', '2:5020/837', '8fffffff8', 'nightbbs.ru', 24554, '8fffffff8');
 INSERT INTO links (station_name, ftn_address, pkt_password, host, port, password)
-VALUES ('2:5020/1453', '2:5020/1453', '9ffffff9', '80.240.218.178', 24554, '9ffffff9);
+VALUES ('2:5020/1453', '2:5020/1453', '9ffffff9', '80.240.218.178', 24554, '9ffffff9');

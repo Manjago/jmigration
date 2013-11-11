@@ -16,6 +16,10 @@ public class Link {
     public Link() {
     }
 
+    public boolean isPoint(){
+        return getFtnAddress() != null && getFtnAddress().contains(".");
+    }
+
     public Link(Link link) {
         this.stationName = link.getStationName();
         this.ftnAddress = link.getFtnAddress();
