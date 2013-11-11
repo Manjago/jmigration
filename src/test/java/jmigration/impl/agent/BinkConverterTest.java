@@ -2,9 +2,9 @@ package jmigration.impl.agent;
 
 import jmigration.common.FreemarkerRunner;
 import jmigration.impl.Utils;
-import jmigration.impl.data.items.Link;
 import jmigration.impl.data.SourceData;
 import jmigration.impl.data.TargetData;
+import jmigration.impl.data.items.Link;
 import junit.framework.TestCase;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.impl.StandardFileSystemManager;
@@ -158,6 +158,6 @@ public class BinkConverterTest {
         String testString = Utils.inputStreamToString(isTest);
 
         TestCase.assertEquals(testString, runString);
-
     }
+
 }

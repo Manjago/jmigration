@@ -35,6 +35,7 @@ public class Exporter {
 
         Map<String, Object> root = new HashMap<>();
         root.put("links", links);
+        root.put("mainuplink", targetData.getMainUplink());
 
 
         Writer out = new OutputStreamWriter(os, Charset.forName("UTF8"));

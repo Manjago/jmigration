@@ -14,3 +14,6 @@ VALUES ('${link.stationName}', '${link.ftnAddress}', '${link.pktPassword}', '${l
     VALUES(SELECT ID FROM links WHERE ftn_address = '${link.ftnAddress}' , 'areaautocreate', 'TRUE');
     </#if>
 </#list>
+
+-- routing
+INSERT INTO routing(nice, route_via) SELECT 65535,id FROM links WHERE ftn_address='${mainuplink}';

@@ -26,6 +26,7 @@ public final class App {
     public static void main(String[] args) throws IOException, TemplateException {
         if (args.length != Const.CFG_COUNT) {
             System.out.println("need 3 files - binkd.cfg, SQAFIX.CFG and SQUISH.CFG and mainuplink address");
+            return;
         }
 
 
