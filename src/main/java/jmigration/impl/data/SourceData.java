@@ -16,7 +16,7 @@ public class SourceData {
         if (!getContent().containsKey(configType)) {
             getContent().put(configType, new Strings());
         }
-        getContent(configType).addLine(line);
+        getContent(configType).addItem(line);
     }
 
     public void forEach(ConfigType configType, Lambda<String, Void> cmd) {

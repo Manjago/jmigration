@@ -7,17 +7,17 @@ import java.util.List;
  * @author Manjago (kirill@temnenkov.com)
  */
 public abstract class ItemsBase<E> implements Items<E> {
-    private List<E> lines;
+    private List<E> items;
 
-    private List<E> getLines() {
-        if (lines == null) {
-            lines = new ArrayList<>();
+    protected List<E> getItems() {
+        if (items == null) {
+            items = new ArrayList<>();
         }
-        return lines;
+        return items;
     }
 
-    public void addLine(E line) {
-        getLines().add(line == null ? null : defensiveCopy(line));
+    public void addItem(E item) {
+        getItems().add(item == null ? null : defensiveCopy(item));
     }
 
     public void forEach(Lambda<E, Void> cmd) {
@@ -25,7 +25,7 @@ public abstract class ItemsBase<E> implements Items<E> {
             return;
         }
 
-        for (E line : getLines()) {
+        for (E line : getItems()) {
             cmd.execute(defensiveCopy(line));
         }
     }
@@ -39,7 +39,7 @@ public abstract class ItemsBase<E> implements Items<E> {
         if (predicate == null) {
             forEach(cmd);
         } else {
-            for (E line : getLines()) {
+            for (E line : getItems()) {
                 if (predicate.passed(line)) {
                     cmd.execute(defensiveCopy(line));
                 }
@@ -51,7 +51,7 @@ public abstract class ItemsBase<E> implements Items<E> {
 
     @Override
     public boolean isEmpty() {
-        return lines == null || lines.size() == 0;
+        return items == null || items.size() == 0;
     }
 
 }

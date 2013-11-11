@@ -16,9 +16,9 @@ public class StringsTest {
 
 
         Items<String> file = new Strings();
-        file.addLine("1");
-        file.addLine("2");
-        file.addLine(null);
+        file.addItem("1");
+        file.addItem("2");
+        file.addItem(null);
 
         final List<String> test = Utils.getItems(file);
 
@@ -70,9 +70,9 @@ public class StringsTest {
     @Test
     public void testPredicate() throws Exception {
         Items<String> file = new Strings();
-        file.addLine("1");
-        file.addLine("2");
-        file.addLine(null);
+        file.addItem("1");
+        file.addItem("2");
+        file.addItem(null);
         final int[] i = {0};
         file.forEach(new Predicate<String>() {
                          @Override
@@ -113,9 +113,9 @@ public class StringsTest {
     @Test
     public void testNullAddLine() throws Exception {
         Items<String> file = new ItemsNull<>();
-        file.addLine("1");
-        file.addLine("2");
-        file.addLine(null);
+        file.addItem("1");
+        file.addItem("2");
+        file.addItem(null);
 
         final List<String> test = Utils.getItems(file);
 

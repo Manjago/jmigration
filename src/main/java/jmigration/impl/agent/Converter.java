@@ -60,7 +60,7 @@ public class Converter {
                 link.setFtnAddress(ftnAddress);
                 link.setHost(host);
                 link.setPassword(pwd);
-                targetData.addLine(link);
+                targetData.addItem(link);
             }
 
             return null;

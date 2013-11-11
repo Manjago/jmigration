@@ -5,7 +5,7 @@ package jmigration.common;
  */
 public class ItemsNull<E> implements Items<E> {
     @Override
-    public void addLine(E line) {
+    public void addItem(E line) {
     }
 
     @Override
