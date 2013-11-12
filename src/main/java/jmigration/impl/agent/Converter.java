@@ -106,7 +106,7 @@ public class Converter {
         }
     }
 
-    private static class DeternineNames implements Lambda<String, Void> {
+    static class DeternineNames implements Lambda<String, Void> {
         private static final int MIN_TOKENS_COUNT = 3;
         private final Map<String, String> names;
 
@@ -131,7 +131,7 @@ public class Converter {
                 if (s2.length > 1) {
                     String pretender = s2[1];
                     if (pretender.startsWith("\"") && pretender.endsWith("\"")) {
-                        name = pretender.substring(1, pretender.length() - 1);
+                        name = pretender.substring(1, pretender.length() - 1).replace("'","''");
                     }
                 }
 

@@ -4,6 +4,7 @@ import jmigration.common.FreemarkerRunner;
 import jmigration.impl.Utils;
 import jmigration.impl.data.SourceData;
 import jmigration.impl.data.TargetData;
+import jmigration.impl.data.items.EchoArea;
 import jmigration.impl.data.items.Link;
 import jmigration.impl.data.items.Subscr;
 import junit.framework.TestCase;
@@ -68,8 +69,17 @@ public class ExportTest {
             }
         });
 
+        List<EchoArea> areas = Utils.getItems(targetData.asAreas());
+        Collections.sort(areas, new Comparator<EchoArea>() {
+            @Override
+            public int compare(EchoArea o1, EchoArea o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+
         root.put("mainuplink", targetData.getMainUplink());
         root.put("subscr", subscrs.subList(0, 5));
+        root.put("areas", areas.subList(0, 23));
     }
 
     @Test
@@ -129,4 +139,17 @@ public class ExportTest {
         TestCase.assertEquals(testString, runString);
     }
 
+    @Test
+    public void testExportAreas() throws Exception {
+
+        FreemarkerRunner.runReport("areas.sql.ftl", root, out);
+
+        InputStream is = fo.getContent().getInputStream();
+        String runString = Utils.inputStreamToString(is);
+
+        InputStream isTest = new FileInputStream(Utils.getPath("areas.sql.txt"));
+        String testString = Utils.inputStreamToString(isTest);
+
+        TestCase.assertEquals(testString, runString);
+    }
 }

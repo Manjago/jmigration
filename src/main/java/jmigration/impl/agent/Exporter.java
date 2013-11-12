@@ -4,7 +4,9 @@ import freemarker.template.TemplateException;
 import jmigration.common.FreemarkerRunner;
 import jmigration.common.Lambda;
 import jmigration.impl.data.TargetData;
+import jmigration.impl.data.items.EchoArea;
 import jmigration.impl.data.items.Link;
+import jmigration.impl.data.items.Subscr;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -23,7 +25,6 @@ public class Exporter {
     public void export(TargetData targetData, OutputStream os) throws IOException, TemplateException {
 
         final List<Link> links = new ArrayList<>();
-
         targetData.asLinks().forEach(new Lambda<Link, Void>() {
             @Override
             public Void execute(Link arg) {
@@ -32,11 +33,29 @@ public class Exporter {
             }
         });
 
+        final List<Subscr> subscrs = new ArrayList<>();
+        targetData.asSubscr().forEach(new Lambda<Subscr, Void>() {
+            @Override
+            public Void execute(Subscr arg) {
+                subscrs.add(arg);
+                return null;
+            }
+        });
+
+        final List<EchoArea> areas = new ArrayList<>();
+        targetData.asAreas().forEach(new Lambda<EchoArea, Void>() {
+            @Override
+            public Void execute(EchoArea arg) {
+                areas.add(arg);
+                return null;
+            }
+        });
 
         Map<String, Object> root = new HashMap<>();
         root.put("links", links);
         root.put("mainuplink", targetData.getMainUplink());
-
+        root.put("subscr", subscrs);
+        root.put("areas", areas);
 
         Writer out = new OutputStreamWriter(os, Charset.forName("UTF8"));
         FreemarkerRunner.runReport("init.sql.ftl", root, out);
