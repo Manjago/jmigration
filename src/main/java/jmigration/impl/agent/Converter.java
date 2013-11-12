@@ -18,11 +18,9 @@ import static jmigration.common.LameLib.checkNotNull;
  */
 public class Converter {
 
-    // файловые арии
-    private static class FileareaInfo {
-        private String areaname;
-        private List<String> links;
-    }
+    private static final String AREA = "Area ";
+    private static final String DESC = "Desc ";
+    private static final String LINKS = "Links ";
 
     public void convert(SourceData sourceData, final TargetData targetData) {
         checkNotNull(sourceData);
@@ -56,24 +54,30 @@ public class Converter {
 
 
         // файловые арии
+        processFileareas(sourceData, targetData);
+
+        targetData.smooth();
+    }
+
+    private void processFileareas(SourceData sourceData, TargetData targetData) {
         Map<String, FileareaInfo> fileareas = new HashMap<>();
 
         sourceData.forEach(ConfigType.DMTIC, new Predicate<String>() {
-                    @Override
-                    public boolean passed(String item) {
-                        return item != null && (item.startsWith("Area ") || item.startsWith("Desc ") || item.startsWith("Links "));
-                    }
-                }, new FileareasLambda(fileareas)
+            @Override
+            public boolean passed(String item) {
+                return item != null && (item.startsWith(AREA) || item.startsWith(DESC) || item.startsWith(LINKS));
+            }
+        }, new FileareasLambda(fileareas)
         );
 
-        for(Map.Entry<String, FileareaInfo> item : fileareas.entrySet()){
+        for (Map.Entry<String, FileareaInfo> item : fileareas.entrySet()) {
             EchoArea area = new EchoArea();
             area.setName(item.getKey());
             area.setDesc(item.getValue().areaname);
             targetData.addFilearea(area);
 
-            if (item.getValue().links != null){
-                for(String link : item.getValue().links){
+            if (item.getValue().links != null) {
+                for (String link : item.getValue().links) {
                     Subscr s = new Subscr();
                     s.setArea(item.getKey());
                     s.setNode(link);
@@ -81,8 +85,6 @@ public class Converter {
                 }
             }
         }
-
-        targetData.smooth();
     }
 
     void determineNames(SourceData sourceData, final Map<String, String> names) {
@@ -93,6 +95,12 @@ public class Converter {
             }
         }, new DeternineNames(names)
         );
+    }
+
+    // файловые арии
+    private static class FileareaInfo {
+        private String areaname;
+        private List<String> links;
     }
 
     private static class ParseBinkString implements Lambda<String, Void> {
@@ -219,74 +227,89 @@ public class Converter {
         }
     }
 
-    private static class FileareasLambda implements Lambda<String, Void> {
+    private static final class FileareasLambda implements Lambda<String, Void> {
 
         private final Map<String, FileareaInfo> fileareas;
-
         private String currentAreaId = null;
 
         private FileareasLambda(Map<String, FileareaInfo> fileareas) {
             this.fileareas = fileareas;
         }
 
-
         @Override
         public Void execute(String arg) {
 
-            LineType lineType = null;
-
-            if (arg.startsWith("Area ")) {
-                lineType = LineType.AREA;
-            } else if (arg.startsWith("Desc ")) {
-                lineType = LineType.DESC;
-            } else if (arg.startsWith("Links ")) {
-                lineType = LineType.LINKS;
-            }
+            LineType lineType = getLineType(arg);
 
             if (lineType == null) {
                 return null;
             }
 
             switch (lineType) {
-                case AREA: {
-                    String[] s = arg.split("\\s+");
-                    if (s.length < 2) {
+                case AREA:
+                    if (processArea(arg)) {
+                        return null;
+                    }
+                    break;
+                case DESC:
+                    processDesc(arg);
+                    break;
+                case LINKS:
+                    if (processLinks(arg)) {
                         return null;
                     }
 
-                    currentAreaId = s[1];
-                    fileareas.put(currentAreaId, new FileareaInfo());
                     break;
-                }
-                case DESC: {
-                    String desc = arg.substring("Desc ".length()).trim();
-
-                    fileareas.get(currentAreaId).areaname = desc;
-                    break;
-
-                }
-                case LINKS: {
-                    String[] s = arg.split("\\s+");
-                    if (s.length < 2) {
-                        return null;
-                    }
-
-                    if (fileareas.get(currentAreaId).links == null){
-                        fileareas.get(currentAreaId).links = new ArrayList<>();
-                    }
-                    for(int i=1; i < s.length; ++i){
-                        if (s[i].length() > 0){
-                            String link = s[i].startsWith("!") ? s[i].substring(1) : s[i];
-                            fileareas.get(currentAreaId).links.add(link);
-                        }
-                    }
-
-                    break;
-                }
             }
 
 
             return null;
+        }
+
+        private boolean processLinks(String arg) {
+            String[] s = arg.split("\\s+");
+            if (s.length < 2) {
+                return true;
+            }
+
+            if (fileareas.get(currentAreaId).links == null) {
+                fileareas.get(currentAreaId).links = new ArrayList<>();
+            }
+            for (int i = 1; i < s.length; ++i) {
+                if (s[i].length() > 0) {
+                    String link = s[i].startsWith("!") ? s[i].substring(1) : s[i];
+                    fileareas.get(currentAreaId).links.add(link);
+                }
+            }
+            return false;
+        }
+
+        private void processDesc(String arg) {
+            fileareas.get(currentAreaId).areaname = arg.substring(DESC.length()).trim();
+        }
+
+        private boolean processArea(String arg) {
+            String[] s = arg.split("\\s+");
+            if (s.length < 2) {
+                return true;
+            }
+
+            currentAreaId = s[1];
+            fileareas.put(currentAreaId, new FileareaInfo());
+            return false;
+        }
+
+        private LineType getLineType(String arg) {
+            LineType lineType = null;
+
+            if (arg.startsWith(AREA)) {
+                lineType = LineType.AREA;
+            } else if (arg.startsWith(DESC)) {
+                lineType = LineType.DESC;
+            } else if (arg.startsWith(LINKS)) {
+                lineType = LineType.LINKS;
+            }
+            return lineType;
         }
 
         enum LineType {
