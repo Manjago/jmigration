@@ -1,0 +1,4 @@
+-- subscription
+<#list subscr as s>
+INSERT INTO SUBSCRIPTION (ECHOAREA_ID , LINK_ID) VALUES (SELECT ID FROM ECHOAREA WHERE NAME = '${s.area}', SELECT ID FROM LINKS WHERE FTN_ADDRESS = '${s.node}');
+</#list>

@@ -5,6 +5,7 @@ import jmigration.impl.Utils;
 import jmigration.impl.data.SourceData;
 import jmigration.impl.data.TargetData;
 import jmigration.impl.data.items.Link;
+import jmigration.impl.data.items.Subscr;
 import junit.framework.TestCase;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.impl.StandardFileSystemManager;
@@ -21,7 +22,6 @@ import static jmigration.impl.Utils.getPath;
  */
 public class ExportTest {
 
-    private List<Link> items;
     private Map<String, Object> root;
     private Writer out;
     private FileObject fo;
@@ -35,7 +35,7 @@ public class ExportTest {
         TargetData targetData = new TargetData();
         converter.convert(data, targetData);
 
-        items = Utils.getItems(targetData.asLinks());
+        List<Link> items = Utils.getItems(targetData.asLinks());
         TestCase.assertEquals(9, items.size());
 
         Collections.sort(items, new Comparator<Link>() {
@@ -55,8 +55,21 @@ public class ExportTest {
 
         root = new HashMap<>();
         root.put("links", items);
-        root.put("mainuplink", targetData.getMainUplink());
 
+        List<Subscr> subscrs = Utils.getItems(targetData.asSubscr());
+        Collections.sort(subscrs, new Comparator<Subscr>() {
+            @Override
+            public int compare(Subscr o1, Subscr o2) {
+                int t = o1.getArea().compareTo(o2.getArea());
+                if (t != 0){
+                    return t;
+                }
+                return o1.getNode().compareTo(o2.getNode());
+            }
+        });
+
+        root.put("mainuplink", targetData.getMainUplink());
+        root.put("subscr", subscrs.subList(0, 5));
     }
 
     @Test
@@ -101,4 +114,19 @@ public class ExportTest {
 
         TestCase.assertEquals(testString, runString);
     }
+
+    @Test
+    public void testExportSubscr() throws Exception {
+
+        FreemarkerRunner.runReport("subscr.sql.ftl", root, out);
+
+        InputStream is = fo.getContent().getInputStream();
+        String runString = Utils.inputStreamToString(is);
+
+        InputStream isTest = new FileInputStream(Utils.getPath("subscr.sql.txt"));
+        String testString = Utils.inputStreamToString(isTest);
+
+        TestCase.assertEquals(testString, runString);
+    }
+
 }
