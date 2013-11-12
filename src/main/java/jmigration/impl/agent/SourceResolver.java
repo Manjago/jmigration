@@ -12,17 +12,19 @@ import java.io.FileNotFoundException;
  * @author Manjago (kirill@temnenkov.com)
  */
 public class SourceResolver {
-    public SourceData resolveSource(String bink, String sqafix, String squish, String mainUplink) throws FileNotFoundException {
+    public SourceData resolveSource(String bink, String sqafix, String squish, String dmtic, String mainUplink) throws FileNotFoundException {
 
         testPath(bink);
         testPath(sqafix);
         testPath(squish);
+        testPath(dmtic);
 
         SourceData result = new SourceData();
 
         loadConfig(result, ConfigType.BINK, bink);
         loadConfig(result, ConfigType.SQAFIX, sqafix);
         loadConfig(result, ConfigType.SQUISH, squish);
+        loadConfig(result, ConfigType.DMTIC, dmtic);
         result.setMainUplink(mainUplink);
 
         return result;

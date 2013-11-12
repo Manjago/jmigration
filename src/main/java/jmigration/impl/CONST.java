@@ -7,5 +7,5 @@ public interface Const {
     /**
      * Количество параметров
      */
-    int CFG_COUNT = 4;
+    int CFG_COUNT = 5;
 }

@@ -18,7 +18,7 @@ public class NamesTest {
     @Test
     public void testNames() throws Exception {
         SourceResolver a = new SourceResolver();
-        SourceData data = a.resolveSource(getPath("binkd.cfg"), getPath("SQAFIX.cfg.simple3"), getPath("SQUISH.cfg.simple2"), "2:5020/1042");
+        SourceData data = a.resolveSource(getPath("binkd.cfg"), getPath("SQAFIX.cfg.simple3"), getPath("SQUISH.cfg.simple2"), getPath("dmtareas.ini"), "2:5020/1042");
 
         Converter converter = new Converter();
         Map<String, String> names = new HashMap<>();

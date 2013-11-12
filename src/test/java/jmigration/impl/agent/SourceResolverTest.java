@@ -47,17 +47,18 @@ public class SourceResolverTest {
     @Test(expected = FileNotFoundException.class)
     public void testResolveBadArgs3() throws Exception {
         SourceResolver a = new SourceResolver();
-        a.resolveSource("0", "1", "2", "2:5020/1042");
+        a.resolveSource("0", "1", "2", "3", "2:5020/1042");
     }
 
     @Test
     public void testResolveGood() throws Exception {
         SourceResolver a = new SourceResolver();
-        SourceData data = a.resolveSource(getPath("binkd.cfg"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg"), "2:5020/1042");
+        SourceData data = a.resolveSource(getPath("binkd.cfg"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg"), getPath("dmtareas.ini"), "2:5020/1042");
         TestCase.assertNotNull(data);
         TestCase.assertFalse(data.isEmpty(ConfigType.BINK));
         TestCase.assertFalse(data.isEmpty(ConfigType.SQAFIX));
         TestCase.assertFalse(data.isEmpty(ConfigType.SQUISH));
+        TestCase.assertFalse(data.isEmpty(ConfigType.DMTIC));
         TestCase.assertTrue(data.isEmpty(null));
     }
 

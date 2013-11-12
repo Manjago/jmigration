@@ -9,10 +9,7 @@ import jmigration.impl.data.items.EchoArea;
 import jmigration.impl.data.items.Link;
 import jmigration.impl.data.items.Subscr;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static jmigration.common.LameLib.checkNotNull;
 
@@ -20,6 +17,12 @@ import static jmigration.common.LameLib.checkNotNull;
  * @author Kirill Temnenkov (kirill@temnenkov.com)
  */
 public class Converter {
+
+    // файловые арии
+    private static class FileareaInfo {
+        private String areaname;
+        private List<String> links;
+    }
 
     public void convert(SourceData sourceData, final TargetData targetData) {
         checkNotNull(sourceData);
@@ -51,6 +54,33 @@ public class Converter {
         }, new ReadAreas(names, targetData, activeLinks)
         );
 
+
+        // файловые арии
+        Map<String, FileareaInfo> fileareas = new HashMap<>();
+
+        sourceData.forEach(ConfigType.DMTIC, new Predicate<String>() {
+                    @Override
+                    public boolean passed(String item) {
+                        return item != null && (item.startsWith("Area ") || item.startsWith("Desc ") || item.startsWith("Links "));
+                    }
+                }, new FileareasLambda(fileareas)
+        );
+
+        for(Map.Entry<String, FileareaInfo> item : fileareas.entrySet()){
+            EchoArea area = new EchoArea();
+            area.setName(item.getKey());
+            area.setDesc(item.getValue().areaname);
+            targetData.addFilearea(area);
+
+            if (item.getValue().links != null){
+                for(String link : item.getValue().links){
+                    Subscr s = new Subscr();
+                    s.setArea(item.getKey());
+                    s.setNode(link);
+                    targetData.addFilesubscr(s);
+                }
+            }
+        }
 
         targetData.smooth();
     }
@@ -131,7 +161,7 @@ public class Converter {
                 if (s2.length > 1) {
                     String pretender = s2[1];
                     if (pretender.startsWith("\"") && pretender.endsWith("\"")) {
-                        name = pretender.substring(1, pretender.length() - 1).replace("'","''");
+                        name = pretender.substring(1, pretender.length() - 1).replace("'", "''");
                     }
                 }
 
@@ -186,6 +216,81 @@ public class Converter {
             }
 
             return null;
+        }
+    }
+
+    private static class FileareasLambda implements Lambda<String, Void> {
+
+        private final Map<String, FileareaInfo> fileareas;
+
+        private String currentAreaId = null;
+
+        private FileareasLambda(Map<String, FileareaInfo> fileareas) {
+            this.fileareas = fileareas;
+        }
+
+
+        @Override
+        public Void execute(String arg) {
+
+            LineType lineType = null;
+
+            if (arg.startsWith("Area ")) {
+                lineType = LineType.AREA;
+            } else if (arg.startsWith("Desc ")) {
+                lineType = LineType.DESC;
+            } else if (arg.startsWith("Links ")) {
+                lineType = LineType.LINKS;
+            }
+
+            if (lineType == null) {
+                return null;
+            }
+
+            switch (lineType) {
+                case AREA: {
+                    String[] s = arg.split("\\s+");
+                    if (s.length < 2) {
+                        return null;
+                    }
+
+                    currentAreaId = s[1];
+                    fileareas.put(currentAreaId, new FileareaInfo());
+                    break;
+                }
+                case DESC: {
+                    String desc = arg.substring("Desc ".length()).trim();
+
+                    fileareas.get(currentAreaId).areaname = desc;
+                    break;
+
+                }
+                case LINKS: {
+                    String[] s = arg.split("\\s+");
+                    if (s.length < 2) {
+                        return null;
+                    }
+
+                    if (fileareas.get(currentAreaId).links == null){
+                        fileareas.get(currentAreaId).links = new ArrayList<>();
+                    }
+                    for(int i=1; i < s.length; ++i){
+                        if (s[i].length() > 0){
+                            String link = s[i].startsWith("!") ? s[i].substring(1) : s[i];
+                            fileareas.get(currentAreaId).links.add(link);
+                        }
+                    }
+
+                    break;
+                }
+            }
+
+
+            return null;
+        }
+
+        enum LineType {
+            AREA, DESC, LINKS
         }
     }
 }

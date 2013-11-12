@@ -1,1 +1,1 @@
-java -Dlogback.configurationFile=logback.xml -jar jmigration-1.0-SNAPSHOT.jar binkd.cfg SQAFIX.CFG SQUISH.CFG 2:5020/1402 >init.sql
+java -Dlogback.configurationFile=logback.xml -jar jmigration-1.0-SNAPSHOT.jar binkd.cfg SQAFIX.CFG SQUISH.CFG dmtareas.ini 2:5020/1402 >init.sql

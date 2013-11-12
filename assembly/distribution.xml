@@ -32,6 +32,7 @@
             <directory>${basedir}/src/test/resources/jmigration/impl</directory>
             <includes>
                 <include>*.cfg</include>
+                <include>*.ini</include>
             </includes>
             <outputDirectory>/</outputDirectory>
         </fileSet>

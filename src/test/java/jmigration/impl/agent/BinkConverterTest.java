@@ -26,7 +26,7 @@ public class BinkConverterTest {
     @Before
     public void setUp() throws Exception {
         SourceResolver a = new SourceResolver();
-        SourceData data = a.resolveSource(getPath("binkd.cfg.simple1"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg"), "2:5020/1042");
+        SourceData data = a.resolveSource(getPath("binkd.cfg.simple1"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg"), getPath("dmtareas.ini"), "2:5020/1042");
 
         Converter converter = new Converter();
         TargetData targetData = new TargetData();
@@ -106,58 +106,6 @@ public class BinkConverterTest {
         TestCase.assertEquals("7fffffff7", items.get(6).getPktPassword());
         TestCase.assertEquals("8fffffff8", items.get(7).getPktPassword());
         TestCase.assertEquals("9ffffff9", items.get(8).getPktPassword());
-    }
-
-    @Test
-    public void testExportLinks() throws Exception {
-
-
-        StandardFileSystemManager manager = new StandardFileSystemManager();
-        manager.init();
-        manager.resolveFile("ram://root/file2.txt").createFile();
-        FileObject fo = manager.resolveFile("ram://root/file2.txt");
-        OutputStream os = fo.getContent().getOutputStream();
-
-        Writer out = new OutputStreamWriter(os);
-
-        Map<String, Object> root = new HashMap<>();
-        root.put("links", items);
-
-        FreemarkerRunner.runReport("links.sql.ftl", root, out);
-
-        InputStream is = fo.getContent().getInputStream();
-        String runString = Utils.inputStreamToString(is);
-
-        InputStream isTest = new FileInputStream(Utils.getPath("links.sql.txt"));
-        String testString = Utils.inputStreamToString(isTest);
-
-        TestCase.assertEquals(testString, runString);
-
-    }
-
-    @Test
-    public void testExportLinksOptions() throws Exception {
-
-        StandardFileSystemManager manager = new StandardFileSystemManager();
-        manager.init();
-        manager.resolveFile("ram://root/file2.txt").createFile();
-        FileObject fo = manager.resolveFile("ram://root/file2.txt");
-        OutputStream os = fo.getContent().getOutputStream();
-
-        Writer out = new OutputStreamWriter(os);
-
-        Map<String, Object> root = new HashMap<>();
-        root.put("links", items);
-
-        FreemarkerRunner.runReport("linksoptions.sql.ftl", root, out);
-
-        InputStream is = fo.getContent().getInputStream();
-        String runString = Utils.inputStreamToString(is);
-
-        InputStream isTest = new FileInputStream(Utils.getPath("linksoptions.sql.txt"));
-        String testString = Utils.inputStreamToString(isTest);
-
-        TestCase.assertEquals(testString, runString);
     }
 
 }

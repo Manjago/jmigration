@@ -30,7 +30,7 @@ public class ExportTest {
     @Before
     public void setUp() throws Exception {
         SourceResolver a = new SourceResolver();
-        SourceData data = a.resolveSource(getPath("binkd.cfg.simple1"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg"), "2:5020/1042");
+        SourceData data = a.resolveSource(getPath("binkd.cfg.simple1"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg"), getPath("dmtareas.ini"), "2:5020/1042");
 
         Converter converter = new Converter();
         TargetData targetData = new TargetData();

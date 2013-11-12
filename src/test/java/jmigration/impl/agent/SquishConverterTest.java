@@ -26,7 +26,7 @@ public class SquishConverterTest {
     @Before
     public void setUp() throws Exception {
         SourceResolver a = new SourceResolver();
-        SourceData data = a.resolveSource(getPath("binkd.cfg"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg.simple2"), "2:5020/1042");
+        SourceData data = a.resolveSource(getPath("binkd.cfg"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg.simple2"), getPath("dmtareas.ini"), "2:5020/1042");
 
         Converter converter = new Converter();
         TargetData targetData = new TargetData();

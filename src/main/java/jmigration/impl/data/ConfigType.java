@@ -1,5 +1,5 @@
 package jmigration.impl.data;
 
 public enum ConfigType {
-    BINK, SQUISH, SQAFIX
+    BINK, SQUISH, SQAFIX, DMTIC
 }

@@ -10,8 +10,24 @@ public class TargetData {
 
     private ItemsLink links;
     private ItemsEchoArea areas;
+    private ItemsEchoArea fileareas;
     private ItemsSubscr subscr;
+    private ItemsSubscr filesubscr;
     private String mainUplink;
+
+    private ItemsSubscr getFilesubscr() {
+        if (filesubscr == null) {
+            filesubscr = new ItemsSubscr();
+        }
+        return filesubscr;
+    }
+
+    private ItemsEchoArea getFileareas() {
+        if (fileareas == null) {
+            fileareas = new ItemsEchoArea();
+        }
+        return fileareas;
+    }
 
     public String getMainUplink() {
         return mainUplink;
@@ -36,8 +52,16 @@ public class TargetData {
         return getAreas();
     }
 
+    public Items<EchoArea> asFileAreas() {
+        return getFileareas();
+    }
+
     public Items<Subscr> asSubscr() {
         return getSubscr();
+    }
+
+    public Items<Subscr> asFilesubscr() {
+        return getFilesubscr();
     }
 
     private ItemsLink getLinks() {
@@ -62,8 +86,16 @@ public class TargetData {
         getAreas().addItem(echoArea);
     }
 
+    public void addFilearea(EchoArea echoArea) {
+        getFileareas().addItem(echoArea);
+    }
+
     public void addSubscr(Subscr subscr) {
         getSubscr().addItem(subscr);
+    }
+
+    public void addFilesubscr(Subscr subscr) {
+        getFilesubscr().addItem(subscr);
     }
 
     public void smooth() {
