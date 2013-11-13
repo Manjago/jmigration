@@ -36,5 +36,12 @@
             </includes>
             <outputDirectory>/</outputDirectory>
         </fileSet>
+        <fileSet>
+            <directory>${basedir}/h2scripts</directory>
+            <includes>
+                <include>*.*</include>
+            </includes>
+            <outputDirectory>/h2scripts</outputDirectory>
+        </fileSet>
     </fileSets>
 </assembly>
