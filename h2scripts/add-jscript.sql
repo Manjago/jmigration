@@ -1,0 +1,2 @@
+INSERT INTO JSCRIPTS (ID, CONTENT) VALUES (1, 'helper.writeFileToEchoarea(""828.test"",""русский subject"",""/opt/jnode/rules/828.test.rules.txt"");');
+INSERT INTO SCHEDULES (DETAILS, JSCRIPT_ID, TYPE) VALUES (0, 1, 'DAILY');
