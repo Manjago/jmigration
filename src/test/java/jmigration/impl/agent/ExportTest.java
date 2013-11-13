@@ -30,7 +30,7 @@ public class ExportTest {
     @Before
     public void setUp() throws Exception {
         SourceResolver a = new SourceResolver();
-        SourceData data = a.resolveSource(getPath("binkd.cfg.simple1"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg"), getPath("dmtareas.ini"), "2:5020/1042");
+        SourceData data = a.resolveSource(getPath("binkd.cfg.simple1"), getPath("SQAFIX.cfg"), getPath("SQUISH.cfg"), getPath("dmtareas.ini.simple"), "2:5020/1042");
 
         Converter converter = new Converter();
         TargetData targetData = new TargetData();
@@ -58,28 +58,22 @@ public class ExportTest {
         root.put("links", items);
 
         List<Subscr> subscrs = Utils.getItems(targetData.asSubscr());
-        Collections.sort(subscrs, new Comparator<Subscr>() {
-            @Override
-            public int compare(Subscr o1, Subscr o2) {
-                int t = o1.getArea().compareTo(o2.getArea());
-                if (t != 0){
-                    return t;
-                }
-                return o1.getNode().compareTo(o2.getNode());
-            }
-        });
+        Collections.sort(subscrs, new SubscrComparator());
+
+        List<Subscr> filesubscrs = Utils.getItems(targetData.asFilesubscr());
+        Collections.sort(filesubscrs, new SubscrComparator());
 
         List<EchoArea> areas = Utils.getItems(targetData.asAreas());
-        Collections.sort(areas, new Comparator<EchoArea>() {
-            @Override
-            public int compare(EchoArea o1, EchoArea o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
+        Collections.sort(areas, new EchoAreaComparator());
+
+        List<EchoArea> fileareas = Utils.getItems(targetData.asFileAreas());
+        Collections.sort(areas, new EchoAreaComparator());
 
         root.put("mainuplink", targetData.getMainUplink());
         root.put("subscr", subscrs.subList(0, 5));
+        root.put("filesubscr", filesubscrs);
         root.put("areas", areas.subList(0, 23));
+        root.put("fileareas", fileareas);
     }
 
     @Test
@@ -151,5 +145,52 @@ public class ExportTest {
         String testString = Utils.inputStreamToString(isTest);
 
         TestCase.assertEquals(testString, runString);
+    }
+
+    @Test
+    public void testExportFileereas() throws Exception {
+
+        FreemarkerRunner.runReport("fileareas.sql.ftl", root, out);
+
+        InputStream is = fo.getContent().getInputStream();
+        String runString = Utils.inputStreamToString(is);
+
+        InputStream isTest = new FileInputStream(Utils.getPath("fileareas.sql.txt"));
+        String testString = Utils.inputStreamToString(isTest);
+
+        TestCase.assertEquals(testString, runString);
+
+    }
+
+    @Test
+    public void testExportFilesubscr() throws Exception {
+
+        FreemarkerRunner.runReport("filesubscr.sql.ftl", root, out);
+
+        InputStream is = fo.getContent().getInputStream();
+        String runString = Utils.inputStreamToString(is);
+
+        InputStream isTest = new FileInputStream(Utils.getPath("filesubscr.sql.txt"));
+        String testString = Utils.inputStreamToString(isTest);
+
+        TestCase.assertEquals(testString, runString);
+    }
+
+    private static class EchoAreaComparator implements Comparator<EchoArea> {
+        @Override
+        public int compare(EchoArea o1, EchoArea o2) {
+            return o1.getName().compareTo(o2.getName());
+        }
+    }
+
+    private static class SubscrComparator implements Comparator<Subscr> {
+        @Override
+        public int compare(Subscr o1, Subscr o2) {
+            int t = o1.getArea().compareTo(o2.getArea());
+            if (t != 0) {
+                return t;
+            }
+            return o1.getNode().compareTo(o2.getNode());
+        }
     }
 }

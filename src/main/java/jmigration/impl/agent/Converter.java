@@ -73,7 +73,7 @@ public class Converter {
         for (Map.Entry<String, FileareaInfo> item : fileareas.entrySet()) {
             EchoArea area = new EchoArea();
             area.setName(item.getKey());
-            area.setDesc(item.getValue().areaname);
+            area.setDesc(item.getValue().areaname != null ? item.getValue().areaname : "");
             targetData.addFilearea(area);
 
             if (item.getValue().links != null) {

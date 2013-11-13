@@ -17,7 +17,6 @@ public class NamesText {
         Converter.DeternineNames d = new Converter.DeternineNames(names);
 
         d.execute("EchoArea N5020.BACKBONE.INFO           A\t\"Hовые эх'и бекбона\"\t");
-        System.out.println(names);
         TestCase.assertTrue(names.containsKey("N5020.BACKBONE.INFO"));
         TestCase.assertTrue(names.get("N5020.BACKBONE.INFO").contains("''"));
     }

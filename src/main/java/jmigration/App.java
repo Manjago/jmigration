@@ -16,7 +16,7 @@ import java.io.IOException;
 public final class App {
 
     private static final int MAINUPLINK = 4;
-    private static final int DMTIC = 4;
+    private static final int DMTIC = 3;
     private static final int SQUISH = 2;
     private static final int SQAFIX = 1;
     private static final int BINK = 0;

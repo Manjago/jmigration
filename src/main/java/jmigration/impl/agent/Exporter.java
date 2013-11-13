@@ -51,11 +51,31 @@ public class Exporter {
             }
         });
 
+        final List<EchoArea> fileareas = new ArrayList<>();
+        targetData.asFileAreas().forEach(new Lambda<EchoArea, Void>() {
+            @Override
+            public Void execute(EchoArea arg) {
+                fileareas.add(arg);
+                return null;
+            }
+        });
+
+        final List<Subscr> filesubscrs = new ArrayList<>();
+        targetData.asFilesubscr().forEach(new Lambda<Subscr, Void>() {
+            @Override
+            public Void execute(Subscr arg) {
+                filesubscrs.add(arg);
+                return null;
+            }
+        });
+
         Map<String, Object> root = new HashMap<>();
         root.put("links", links);
         root.put("mainuplink", targetData.getMainUplink());
         root.put("subscr", subscrs);
         root.put("areas", areas);
+        root.put("fileareas", fileareas);
+        root.put("filesubscr", filesubscrs);
 
         Writer out = new OutputStreamWriter(os, Charset.forName("UTF8"));
         FreemarkerRunner.runReport("init.sql.ftl", root, out);

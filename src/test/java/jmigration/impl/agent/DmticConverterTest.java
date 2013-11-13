@@ -33,7 +33,7 @@ public class DmticConverterTest {
         converter.convert(data, targetData);
 
         areas = Utils.getItems(targetData.asFileAreas());
-        TestCase.assertEquals(2, areas.size());
+        TestCase.assertEquals(3, areas.size());
 
         Collections.sort(areas, new Comparator<EchoArea>() {
             @Override
@@ -55,7 +55,7 @@ public class DmticConverterTest {
 
             }
         });
-        TestCase.assertEquals(10, subscrs.size());
+        TestCase.assertEquals(13, subscrs.size());
     }
 
     @Test
@@ -63,9 +63,11 @@ public class DmticConverterTest {
 
         TestCase.assertEquals("FAR", areas.get(0).getName());
         TestCase.assertEquals("PNT5020", areas.get(1).getName());
+        TestCase.assertEquals("ZMASYANYA", areas.get(2).getName());
 
         TestCase.assertEquals("Софт касающийся программы FAR by Eugene Roshal", areas.get(0).getDesc());
         TestCase.assertEquals("Moscow pointlist", areas.get(1).getDesc());
+        TestCase.assertEquals("", areas.get(2).getDesc());
 
         TestCase.assertEquals("FAR", subscrs.get(0).getArea());
         TestCase.assertEquals("2:5020/12000", subscrs.get(0).getNode());
@@ -89,6 +91,12 @@ public class DmticConverterTest {
         TestCase.assertEquals("PNT5020", subscrs.get(9).getArea());
         TestCase.assertEquals("2:5020/828.91", subscrs.get(9).getNode());
 
+        TestCase.assertEquals("ZMASYANYA", subscrs.get(10).getArea());
+        TestCase.assertEquals("2:5020/12000", subscrs.get(10).getNode());
+        TestCase.assertEquals("ZMASYANYA", subscrs.get(11).getArea());
+        TestCase.assertEquals("2:5020/1754", subscrs.get(11).getNode());
+        TestCase.assertEquals("ZMASYANYA", subscrs.get(12).getArea());
+        TestCase.assertEquals("2:5020/828.69", subscrs.get(12).getNode());
 
     }
 

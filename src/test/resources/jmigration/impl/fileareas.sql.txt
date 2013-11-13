@@ -1,0 +1,4 @@
+-- fileareas
+INSERT INTO FILEAREA (NAME, DESCRIPTION, WLEVEL, RLEVEL,GRP) values('FAR', 'Софт касающийся программы FAR by Eugene Roshal',0, 0,'');
+INSERT INTO FILEAREA (NAME, DESCRIPTION, WLEVEL, RLEVEL,GRP) values('PNT5020', 'Moscow pointlist',0, 0,'');
+INSERT INTO FILEAREA (NAME, DESCRIPTION, WLEVEL, RLEVEL,GRP) values('ZMASYANYA', '',0, 0,'');
