@@ -6,6 +6,7 @@ import jmigration.common.FreemarkerRunner;
 import jmigration.common.Ftn4D;
 import jmigration.common.Lambda;
 import jmigration.impl.data.TargetData;
+import jmigration.impl.data.items.FileInfo;
 import jmigration.impl.data.items.Link;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class BatExporter {
 
     public void export(TargetData targetData, OutputStream os) throws IOException, TemplateException {
 
-        List<String> files = intExport(targetData);
+        List<FileInfo> files = intExport(targetData);
 
         Map<String, Object> root = new HashMap<>();
         root.put("files", files);
@@ -32,9 +33,9 @@ public class BatExporter {
 
     }
 
-    public List<String> intExport(TargetData targetData){
+    public List<FileInfo> intExport(TargetData targetData){
 
-        final List<String> result = new ArrayList<>();
+        final List<FileInfo> result = new ArrayList<>();
 
         final List<Link> links = new ArrayList<>();
         targetData.asLinks().forEach(new Lambda<Link, Void>() {
@@ -47,7 +48,7 @@ public class BatExporter {
 
         for(Link link : links){
             Ftn4D ftn4D = Ftn4D.fromStr(link.getFtnAddress());
-            result.add(getFilename(ftn4D));
+            result.add(new FileInfo(getFilename(ftn4D), link.getFtnAddress()));
         }
 
         return result;
