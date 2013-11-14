@@ -2,8 +2,9 @@ package jmigration;
 
 import freemarker.template.TemplateException;
 import jmigration.impl.Const;
+import jmigration.impl.agent.BatExporter;
 import jmigration.impl.agent.Converter;
-import jmigration.impl.agent.Exporter;
+import jmigration.impl.agent.SqlExporter;
 import jmigration.impl.agent.SourceResolver;
 import jmigration.impl.data.SourceData;
 import jmigration.impl.data.TargetData;
@@ -34,6 +35,7 @@ public final class App {
         SourceData sourceData = new SourceResolver().resolveSource(args[BINK], args[SQAFIX], args[SQUISH], args[DMTIC], args[MAINUPLINK]);
         TargetData targetData = new TargetData();
         new Converter().convert(sourceData, targetData);
-        new Exporter().export(targetData, System.out);
+        new SqlExporter().export(targetData, System.out);
+        new BatExporter().export(targetData, System.out);
     }
 }

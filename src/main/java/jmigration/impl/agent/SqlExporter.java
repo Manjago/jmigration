@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * @author Kirill Temnenkov (ktemnenkov@intervale.ru)
  */
-public class Exporter {
+public class SqlExporter {
     public void export(TargetData targetData, OutputStream os) throws IOException, TemplateException {
 
         final List<Link> links = new ArrayList<>();
